@@ -16,7 +16,7 @@ module RailsAdmin
           end
 
           register_instance_option :searchable do
-            @searchable ||= associated_model_config.abstract_model.properties.collect(&:name).include?(associated_model_config.object_label_method) ? [associated_model_config.object_label_method, {abstract_model.model => method_name}] : {abstract_model.model => method_name}
+            @searchable ||= (associated_model_config.abstract_model.present? && associated_model_config.abstract_model.properties.collect(&:name).include?(associated_model_config.object_label_method)) ? [associated_model_config.object_label_method, {abstract_model.model => method_name}] : {abstract_model.model => method_name}
           end
 
           register_instance_option :partial do
